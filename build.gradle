@@ -54,7 +54,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 springBoot  {
-    mainClass = "org.springframework.boot.loader.PropertiesLauncher"
+    mainClass = "Application"
 
     layoutFactory = new CustomLayoutFactory()
 
