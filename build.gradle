@@ -18,6 +18,11 @@ class CustomLayoutFactory implements LayoutFactory{
                 public String getRepackagedClassesLocation() {
                     return "";
                 }
+
+                @Override
+                public String getLauncherClassName() {
+                    return "org.springframework.boot.loader.PropertiesLauncher";
+                }
             };
         }
 
@@ -29,10 +34,16 @@ class CustomLayoutFactory implements LayoutFactory{
 
 buildscript {
     repositories {
-        mavenCentral()
+       // mavenCentral()
+        jcenter()
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'http://repo.spring.io/milestone' }
+
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE")
+      //  classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE")
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.BUILD-SNAPSHOT'
+
     }
 }
 
@@ -44,6 +55,19 @@ apply plugin: 'org.springframework.boot'
 jar {
     baseName = 'complete'
     version =  '0.1.0'
+}
+
+sourceSets {
+   main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+
+   }
+
 }
 
 repositories {
@@ -67,8 +91,14 @@ bootRepackage {
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.1.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.5.1.RELEASE'
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.1.RELEASE'
+
+    //  compile("org.springframework.boot:spring-boot-starter-web")
     compile group: 'org.springframework.boot', name: 'spring-boot-loader-tools', version: '1.5.1.RELEASE'
 
+  //  compile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.0.BUILD-SNAPSHOT'
+  //  compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.0.0.BUILD-SNAPSHOT'
+  //  compile("org.springframework.boot:spring-boot-starter-web")
+  //  compile group: 'org.springframework.boot', name: 'spring-boot-loader-tools', version: '2.0.0.BUILD-SNAPSHOT'
 }
 
